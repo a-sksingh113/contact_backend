@@ -1,57 +1,53 @@
-
-const asyncHandler = require("express-async-handler")
-const Contact  = require("../models/contactModel");
-
+const asyncHandler = require("express-async-handler");
+const Contact = require("../models/contactModel");
 
 //get conatcts
 const getContacts = asyncHandler(async (req, res) => {
-  const contacts = await Contact.findOne();
-  res.status(200).json(contacts);
+  const contact = await Contact.find();
+  res.status(200).json(contact);
 });
-
-
-
 
 //create contacts
-const createContacts =  asyncHandler(async(req, res) => {
+  const createContact = asyncHandler(async (req, res) => {
   console.log("the  requested body is", req.body);
   const { name, email, phone } = req.body;
-   if(!name || !email || !phone){
-  res.status(400);
-  throw new Error("all the fields are mandatory");}
-
-  res.status(201).json({ message: "create contacts" });
+  if (!name || !email || !phone) {
+    res.status(400);
+    throw new Error("all the fields are mandatory");
+  }
+  const contacts = await Contact.create({
+    name,
+    email,
+    phone,
+  });
+  res.status(201).json(contacts);
 });
-
-
-
 
 //get an indi contacts
 const getContact = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `get an contacts ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+  if(!contact){
+    res.status(404);
+    throw new Error("contact not found")
+  }
+  res.status(200).json(contact);
 });
 
-
-
-
 // update contacts
-const updateContacts = asyncHandler(async (req, res) => {
+const updateContact = asyncHandler(async (req, res) => {
   res.status(200).json({ message: `update contacts ${req.params.id}` });
 });
 
-
-
 //deleteconatcts
 
-const deleteContact = asyncHandler(async(req, res) => {
+const deleteContact = asyncHandler(async (req, res) => {
   res.status(200).json({ message: `delete contacts ${req.params.id}` });
 });
 
-
 module.exports = {
   getContacts,
-  createContacts,
+  createContact,
   getContact,
-  updateContacts,
+  updateContact,
   deleteContact,
 };
