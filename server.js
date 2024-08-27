@@ -1,4 +1,5 @@
 const express = require('express')
+const errorHandler = require('./middleware/errorHandler');
 const dotenv = require('dotenv').config()
 const connectDB = require('./config/dbConnections');
 const app = express();
@@ -7,13 +8,9 @@ connectDB();
 
 
 app.use(express.json());
-app.get("/api/contacts",(req,res)=>{
-    res.send("get all contacts");
-})
-
 app.use("/api/contacts", require('./routes/contactsRoutes'));
 
-
+app.use(errorHandler);
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`)
