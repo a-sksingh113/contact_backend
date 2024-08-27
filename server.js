@@ -8,7 +8,9 @@ connectDB();
 
 
 app.use(express.json());
-app.use("/api/contact", require('./routes/contactsRoutes'));
+app.use("/api/contacts", require('./routes/contactsRoutes'));
+app.use("/api/users", require('./routes/userRoutes'));
+
 app.use(errorHandler);
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`)
