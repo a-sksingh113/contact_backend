@@ -4,7 +4,7 @@ const Contact = require("../models/contactModel");
 //get conatcts
 //@ /api/contacts/
 const getContacts = asyncHandler(async (req, res) => {
-  const contact = await Contact.find();
+  const contact = await Contact.find({user_id : req.user.id});
   res.status(200).json(contact);
 });
 
@@ -21,6 +21,7 @@ const getContacts = asyncHandler(async (req, res) => {
     name,
     email,
     phone,
+    user_id: req.user.id,
   });
   res.status(201).json(contacts);
 });
@@ -39,13 +40,35 @@ const getContact = asyncHandler(async (req, res) => {
 // update contacts
 //@ /api/contacts/1
 const updateContact = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `update contacts ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+  if(!contact){
+    res.status(404);
+    throw new Error("contact not found")
+  }
+  if(contact.user_id.toString() !== req.user.id){
+    res.status(403);
+    throw new Error("user dont have access to update the others contact");
+  }
+  const updatedContact = await Contact.findByIdAndUpdate(req.params.id,req.body,{new:true});
+  res.status(200).json(updatedContact);
 });
 
 //deleteconatcts
 //@ /api/contacts/1
 const deleteContact = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `delete contacts ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+  if(!contact){
+    res.status(404);
+    throw new Error("contact not found")
+  }
+  if(contact.user_id.toString() !== req.user.id){
+    res.status(403);
+    throw new Error("user dont have access to delete the others contact");
+  }
+  //await contact.remove(); not working 
+ // await Contact.findByIdAndRemove(req.params.id); 
+  await Contact.deleteOne({ _id: req.params.id });
+  res.status(200).json(contact);
 });
 
 module.exports = {
