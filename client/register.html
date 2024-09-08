@@ -18,6 +18,7 @@
         <input type="password" id="password" name="password" required>
         <br><br>
         <button type="submit">Register</button>
+        <p>Already have an account? <a href="/login">Login</a></p>
     </form>
 
     <script>
@@ -36,7 +37,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert('Registration successful!');
+                alert('Registration successful! Please Login');
+                window.location.href = '/login'; // Redirect to the login page
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -45,4 +47,141 @@
         });
     </script>
 </body>
+<style>/* Styles for the register page */
+  /* Styles for the register page */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align elements to the top */
+    align-items: center;
+}
+
+/* Container for the form */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-top: 20px; /* Margin to create space from the top */
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animated heading */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 50px; /* Add margin to push the heading away from the top */
+    animation: slideInDown 1s ease-in-out;
+}
+
+/* Label styling */
+label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+/* Focus state for input fields */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Submit button styling */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Hover effect for button */
+button:hover {
+    background-color: #218838;
+}
+
+/* Link styling */
+p {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+  </style>
 </html>

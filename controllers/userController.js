@@ -9,12 +9,13 @@ const User = require("../models/userModel");
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
+
   // Check if all fields are present
   if (!username || !email || !password) {
     res.status(400);
     throw new Error("All fields are mandatory!");
   }
-
+  
   // Check if user already exists
   const userAvailable = await User.findOne({ email });
   if (userAvailable) {
@@ -31,6 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
     username,
     email,
     password: hashedPassword,
+    //confirmPassword:hashedPassword,
   });
 
   console.log(`User created ${user}`);
@@ -64,7 +66,7 @@ const loginUser = asyncHandler(async (req, res) => {
         user: {
           username: user.username,
           email: user.email,
-          id: user.id,
+          id: user._id,
         },
       },
       process.env.ACCESS_TOKEN_SECRET,

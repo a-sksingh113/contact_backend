@@ -15,6 +15,7 @@
         <input type="password" id="password" name="password" required>
         <br><br>
         <button type="submit">Login</button>
+        <p>Already have an account? <a href="/register">Register</a></p>
     </form>
 
     <script>
@@ -37,7 +38,8 @@
                 if (data.accessToken) {
                     // Set the accessToken in localStorage
                     localStorage.setItem('accessToken', data.accessToken);
-                    alert('Login successful!');
+                    alert('Login successful! Redirecting to dashboard...');
+                    window.location.href = '/contacts'; 
                     // Optionally, redirect to another page after successful login
                     // window.location.href = 'dashboard.html';
                 } else {
@@ -51,4 +53,153 @@
         });
     </script>
 </body>
+<style>/* General styles for body */
+   /* General styles for body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: flex-start; /* Move content to the top */
+    align-items: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animated heading */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5rem;
+    margin-top: 30px; /* Add some space from the top */
+    margin-bottom: 20px;
+    animation: slideInFromTop 1.2s ease-in-out;
+}
+
+/* Container for form */
+form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px; /* Space between heading and form */
+    animation: slideIn 1.2s ease-in-out;
+}
+
+/* Rest of the styles remain unchanged */
+
+/* Label styling */
+label {
+    display: block;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Input styling */
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    transition: all 0.3s ease;
+}
+
+/* Input focus effects */
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Submit button styles */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Button hover effects */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Link styles */
+p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+    </style>
 </html>
