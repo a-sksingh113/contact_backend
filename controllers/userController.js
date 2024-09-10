@@ -20,7 +20,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const userAvailable = await User.findOne({ email });
   if (userAvailable) {
     res.status(400);
-    throw new Error("User already exists");
+    throw new Error("User already exists please try with different email");
   }
 
   // Hash password
@@ -48,16 +48,16 @@ const registerUser = asyncHandler(async (req, res) => {
 // api/user/login
 // Public
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   // Check if all fields are present
-  if (!email || !password) {
+  if (!username || !password) {
     res.status(400);
     throw new Error("All fields are mandatory");
   }
 
   // Find user by email
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ username });
 
   // Compare password with hashed password
   if (user && (await bcrypt.compare(password, user.password))) {

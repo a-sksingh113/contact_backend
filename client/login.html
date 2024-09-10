@@ -8,11 +8,11 @@
 <body>
     <h2>Login</h2>
     <form id="loginForm">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <label for="username">Username:</label>
+        <input type="username" id="username" name="username" required placeholder="username">
         <br><br>
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required placeholder="Password">
         <br><br>
         <button type="submit">Login</button>
         <p>Already have an account? <a href="/register">Register</a></p>
@@ -22,7 +22,7 @@
         document.getElementById('loginForm').addEventListener('submit', (event)=>{
             event.preventDefault(); // Prevent the default form submission
 
-            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             // Send a POST request to /api/user/login
@@ -31,7 +31,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email: email, password: password })
+                body: JSON.stringify({ username: username, password: password })
             })
             .then(response => response.json())
             .then(data => {
@@ -101,7 +101,7 @@ label {
 }
 
 /* Input styling */
-input[type="email"],
+input[type="username"],
 input[type="password"] {
     width: 80%;
     padding: 10px;
@@ -114,7 +114,7 @@ input[type="password"] {
 }
 
 /* Input focus effects */
-input[type="email"]:focus,
+input[type="username"]:focus,
 input[type="password"]:focus {
     border-color: #007bff;
     background-color: #fff;
