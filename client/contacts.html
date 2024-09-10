@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,9 @@
     <div id="contactDetails">
         <!-- Contact details will be displayed here -->
     </div>
+
+    <!-- Logout button -->
+    <button id="logoutButton">Logout</button>
 
     <script>
         // Function to fetch and display contact details
@@ -49,88 +53,49 @@
             });
         }
 
+        // Function to handle logout
+        function logout() {
+            localStorage.removeItem('accessToken'); // Remove the token from localStorage
+            alert('You have been logged out.');
+            window.location.href = '/login'; // Redirect to login page after logout
+        }
+
         // Call the function to fetch and display contact details when the page loads
         window.onload = fetchContactDetails;
+
+        // Attach the logout function to the button
+        document.getElementById('logoutButton').onclick = logout;
     </script>
+    <style>/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+#contactDetails p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+button#logoutButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button#logoutButton:hover {
+    background-color: #d32f2f;
+}
+</style>
 </body>
-<style>/* General styles for body */
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f4f4f9;
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        animation: fadeIn 1.5s ease-in-out;
-    }
-    
-    /* Animated heading */
-    h2 {
-        text-align: center;
-        color: #2c3e50;
-        font-size: 2.5rem;
-        margin-top: 40px;
-        animation: slideInFromTop 1.2s ease-in-out;
-    }
-    
-    /* Contact details section */
-    #contactDetails {
-        background-color: #ffffff;
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-        width: 80%;
-        max-width: 600px;
-        animation: slideIn 1s ease-in-out;
-    }
-    
-    #contactDetails p {
-        color: #34495e;
-        font-size: 1rem;
-        margin: 10px 0;
-        font-weight: bold;
-    }
-    
-    hr {
-        border: 0;
-        height: 1px;
-        background: #dcdcdc;
-        margin: 20px 0;
-    }
-    
-    /* Animations */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideIn {
-        from {
-            transform: translateY(50px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideInFromTop {
-        from {
-            transform: translateY(-30px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    </style>
 </html>
